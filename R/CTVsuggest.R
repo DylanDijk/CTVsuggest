@@ -1,14 +1,15 @@
 #' Output suggestions for packages to be added to a Task View
 #'
-#' Outputs suggestions for packages to be added to a Task View.
-#'
 #' @param taskview A character vector with one element, must be one of the [Task Views available](https://github.com/cran-task-views/ctv#available-task-views)
 #' @param n An integer that decides the number of suggestions to show.
 #'
 #' @return A data frame with suggested packages and there classification probability
 #'
-#'
 #' @export
+#'
+#' @examples
+#' CTVsuggest(taskview = "Econometrics", n = 5)
+
 CTVsuggest = function(taskview = "Econometrics", n = 5){
 
 
