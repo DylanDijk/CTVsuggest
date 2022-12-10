@@ -7,8 +7,14 @@
 #'
 #' @export
 #'
+#'
 #' @examples
+#' \donttest{
 #' CTVsuggest(taskview = "Econometrics", n = 5)
+#'}
+#'
+#'
+
 
 CTVsuggest = function(taskview = "Econometrics", n = 5){
 

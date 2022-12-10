@@ -18,5 +18,9 @@ A data frame with suggested packages and there classification probability
 Output suggestions for packages to be added to a Task View
 }
 \examples{
+\donttest{
 CTVsuggest(taskview = "Econometrics", n = 5)
+}
+
+
 }
