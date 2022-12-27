@@ -2,7 +2,7 @@
 % Please edit documentation in R/CTVsuggest.R
 \name{CTVsuggest}
 \alias{CTVsuggest}
-\title{Output suggestions for packages to be added to a Task View}
+\title{Output CRAN Task View suggestions}
 \usage{
 CTVsuggest(taskview = "Econometrics", n = 5)
 }
@@ -12,10 +12,12 @@ CTVsuggest(taskview = "Econometrics", n = 5)
 \item{n}{An integer that decides the number of suggestions to show.}
 }
 \value{
-A data frame with suggested packages and there classification probability
+A \link{data.frame} with suggested packages and there classification probability.
 }
 \description{
-Output suggestions for packages to be added to a Task View
+The \code{CTVsuggest()} function takes a Task View name and argument \code{n},
+then outputs a \link{data.frame} containing the top \code{n} recommendations for the chosen Task View.
+The predicted probabilities are computed from the model object constructed with the \code{\link[CTVsuggestTrain:Train_model]{CTVsuggestTrain::Train_model()}} function.
 }
 \examples{
 \donttest{
