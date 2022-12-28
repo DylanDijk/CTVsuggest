@@ -1,0 +1,176 @@
+---
+title: "CTVsuggest-Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{CTVsuggest-Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+# CTVsuggest Package
+
+The aim of this package is to give suggestions for packages to be added to Task Views.
+
+There is a main function, `CTVsuggest::CTVsuggest()`, that outputs these suggestions.
+
+
+## CTVsuggest Example
+
+<!-- I have given the package and function the same name so that it is easy to remember, both are named **CTVsuggest**. -->
+
+First install the **CTVsuggest** package:
+```{r, warning = FALSE, message = FALSE, results='hide'}
+library(devtools)
+install_github("DylanDijk/CTVsuggest")
+```
+
+Then attach the package.
+```{r}
+library(CTVsuggest)
+```
+
+
+To output the top 5 suggested packages for the **NaturalLanguageProcessing** Task View 
+
+```{r}
+CTVsuggest(n = 5, taskview = "NaturalLanguageProcessing")
+```
+
+
+## The Package Workflow
+Alongside the **CTVsuggest** package there is the **CTVsuggestTrain** package that contains code which executes the training of the model.
+
+The current workflow is that I run the `CTVsuggestTrain::Train_model()` function, and then use the trained model to get predicted classification probabilities for packages. I find the classification probabilities for packages that are not assigned a Task View and that does not meet a monthly download threshold. 
+
+I then store predicted probabilities on the [CTVsuggestTrain](https://github.com/DylanDijk/CTVsuggestTrain) GitHub repo, the **CTVsuggest** package can then read this to output suggestions for different Task Views.
+
+
+
+## The Model
+
+I now give a high level view of how the model is trained.
+
+Look at the CTVsuggestTrain section or the CTVsuggestTrain package documentation for a more detailed description.
+
+
+### Multinomial Logistic Regression
+The model aims to give a Task View suggestion after being giving some set of features of an unassigned package. There are packages that are assigned to multiple Task Views, but I have looked at classifying packages to a single Task View. Therefore, I have set this up as a multi-class classification problem, compared to a multi-label problem. 
+
+However, it would not be reasonable to assign a Task View to every package.
+This would depart from the objective of Task Views, which is to give a sharp focus on packages that are needed for a task.
+For this reason, the model also has the possibility of assigning a package to no Task View. 
+Therefore, the number of possible labels in this classification problem is the number of Task Views + 1.
+
+To perform this multi-class classification problem I have used **Multinomial Logistic Regression** with a LASSO penalty, trained using the `cv.glmnet` package.
+
+### Features
+
+I have used three different types of data to create the features for this model:
+
+- Text data from Package and Task View descriptions. $n$ Features
+- Package dependencies. $n + 1$ features
+- Other Packages developed by the Authors. $n + 1$ features
+
+I have given the number of features constructed from each data type, where $n$ denotes the number of Task Views. 
+
+I will now go into more detail into how I constructed features from this data.
+
+
+
+#### Text data from Package and Task View descriptions
+
+- Each package on CRAN has a title and description describing the purpose of the package 
+  - Example: [fxregime package web page](https://cran.r-project.org/web/packages/fxregime/index.html)
+- Each Task View has a page with text describing its scope
+  - Example: [Econometrics Task View description](https://cran.r-project.org/web/views/Econometrics.html)
+
+I extract the Task View text data from their corresponding markdown files ([Econometrics Task View Markdown file](https://github.com/cran-task-views/Econometrics/blob/main/Econometrics.md)) that exist within their GitHub repositories. All of the GitHub repositories can be found in the  [cran-task-views](https://github.com/cran-task-views) GitHub account.
+
+I also extract the titles and descriptions for each of the packages. I then measure the similarity between the package text to each Task View text to create $n$ features.
+
+
+#### Package Dependencies
+
+For each package, I look at the immediate hard dependencies to other packages, and then calculate the proportion
+of the assignment of these packages to Task Views.
+
+#### Other Packages developed by the Authors
+
+For each package I look at all of the other packages created by the authors of that package. I then calculate the proportion of these packages that are assigned to each Task View.    
+
+
+### Training Data
+
+To train and test the model I used packages that were assigned a Task View, I also used a set of packages which I labelled as not belonging to a Task View.
+The large proportion of packages not belonging to a Task View would have not been reviewed by Task View maintainers, and so would not be
+representative for packages belonging to the “None” category.Therefore to choose the packages to include that are labelled as belonging to the “None”
+category, we select packages that have a high amount of monthly downloads
+
+Then from this set of packages I split it with an 80:20 ratio, into a training and testing set.
+
+### Predictions
+
+Using the trained model, I can get predictions by looking at the predicted classification probabilities when given the set of features of a package.
+I output the predicted classification probabilities for the packages that are not assigned a Task View and do not meet the monthly download threshold I mentioned in the previous section.
+
+### Accuracy
+
+The accuracy of the model can then be measured by comparing the trained model predictions with the testing set.
+
+In particular, I set the predicted Task View to be the one with the largest predicted probability. The accuracy is then measured as the
+proportion of correct predictions on the testing set. For packages that are assigned to multiple Task View, I set a prediction as accurate if its
+prediction is one of its assigned Task Views.
+
+
+
+## CTVsuggestTrain
+
+First install the **CTVsuggestTrain** package:
+```{r, warning = FALSE, message = FALSE, results='hide', eval=FALSE}
+library(devtools)
+install_github("DylanDijk/CTVsuggestTrain")
+```
+
+As mentioned above, the training of the models is performed with the `CTVsuggestTrain::Train_model()` function. This function uses four internal functions of the CTVsuggestTrain package which are run in order: 
+
+- `get_data()`
+- `get_NLP()`
+<!-- Using all of the text from the Task View I have created a corpus. Then for each word I calculated the term frequency -->
+<!-- For each package I have combined the title and description text, then I have vectorised this text as well as the Task View text. -->
+<!-- Then for each package I have calculated the cosine similarity between its text vector against all of the Task Views text vectors.  -->
+
+- `get_create_features()`
+- `get_CRAN_logs()`
+
+
+
+
+
+
+
+
+<!-- Due to the huge number of packages -->
+<!-- that are in CRAN it is infeasible for a Task View maintainer to review all of the available -->
+<!-- packages.Therefore, a model that would give a small selection of high quality suggestions -->
+<!-- for the maintainer to then review would be useful. Such a model would also be useful from the perspective of a package developer. After -->
+<!-- publishing their package onto CRAN, they could then check whether they should propose -->
+<!-- their package to one of the Task View maintainers. -->
+
+
+<!-- The model we want to construct should give a Task View suggestion after being giving -->
+<!-- some set of features of an unassigned package. However, it would not be reasonable to -->
+<!-- assign a Task View to every package. This would depart from the objective of Task Views, -->
+<!-- which is to give a sharp focus on packages that are needed for a task. For this reason, the -->
+<!-- model should also have the possibility of assigning a package to no Task View. -->
+<!-- Consequently, the model should have a multicategory response variable, made up of 37 categories. The 36 Task Views with an -->
+<!-- additional “None” category. -->
+
+

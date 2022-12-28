@@ -17,6 +17,8 @@ A \link{data.frame} with suggested packages and there classification probability
 \description{
 The \code{CTVsuggest()} function takes a Task View name and argument \code{n},
 then outputs a \link{data.frame} containing the top \code{n} recommendations for the chosen Task View.
+}
+\details{
 The predicted probabilities are computed from the model object constructed with the \code{\link[CTVsuggestTrain:Train_model]{CTVsuggestTrain::Train_model()}} function.
 }
 \examples{
