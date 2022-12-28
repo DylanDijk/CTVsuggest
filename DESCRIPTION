@@ -13,3 +13,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://dylandijk.github.io/CTVsuggest/
