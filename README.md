@@ -11,7 +11,9 @@ be added to available [CRAN Task
 Views](https://github.com/cran-task-views/ctv#available-task-views).
 
 The **CTVsuggest** package has a single simple function: `CTVsuggest()`,
-that outputs suggestions. The model training is carried out by the
+that outputs package suggestions.
+
+The model training is carried out by the
 [**CTVsuggestTrain**](https://dylandijk.github.io/CTVsuggestTrain/)
 package, for further detail on the workflow view the [Packages Workflow
 Section](https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html#the-package-workflow)
@@ -20,8 +22,7 @@ Vignette](https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.ht
 
 ## Installation
 
-You can install the development version of CTVsuggest from
-[GitHub](https://github.com/) with:
+You can install the development version of CTVsuggest from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -32,7 +33,7 @@ devtools::install_github("DylanDijk/CTVsuggest")
 
 `CTVsuggest()` function takes a Task View name (`taskview`) and `n` as
 arguments. Then outputs a `data.frame` containing the top `n`
-recommendations for the chosen Task View (`taskview`).
+recommendations for the chosen Task View.
 
 ``` r
 library(CTVsuggest)
