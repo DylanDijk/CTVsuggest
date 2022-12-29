@@ -7,9 +7,16 @@
 <!-- badges: end -->
 
 The aim of **CTVsuggest** is to provide recommendations for packages to
-be added to CRAN Task Views.
+be added to available [CRAN Task
+Views](https://github.com/cran-task-views/ctv#available-task-views).
 
-The **CTVsuggest** package has a single simple function `CTVsuggest()`.
+The **CTVsuggest** package has a single simple function: `CTVsuggest()`,
+that outputs suggestions. The model training is carried out by the
+[**CTVsuggestTrain**](https://dylandijk.github.io/CTVsuggestTrain/)
+package, for further detail on the workflow view the [Packages Workflow
+Section](https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html#the-package-workflow)
+of the [CTVsuggest Overview
+Vignette](https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html).
 
 ## Installation
 
@@ -23,36 +30,18 @@ devtools::install_github("DylanDijk/CTVsuggest")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+`CTVsuggest()` function takes a Task View name (`taskview`) and `n` as
+arguments. Then outputs a `data.frame` containing the top `n`
+recommendations for the chosen Task View (`taskview`).
 
 ``` r
 library(CTVsuggest)
-## basic example code
+
+CTVsuggest(taskview = "NaturalLanguageProcessing", n = 5)
+#>                NaturalLanguageProcessing       Packages
+#> LSX                            0.9929149            LSX
+#> doc2vec                        0.9819230        doc2vec
+#> text.alignment                 0.9626282 text.alignment
+#> jiebaRD                        0.9530279        jiebaRD
+#> R.temis                        0.9166350        R.temis
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.

@@ -13,6 +13,6 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://dylandijk.github.io/CTVsuggest/
+URL: https://dylandijk.github.io/CTVsuggest/, https://github.com/dylandijk/CTVsuggest
 Imports: 
     devtools
