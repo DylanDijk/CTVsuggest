@@ -69,11 +69,12 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The aim of <strong>CTVsuggest</strong> is to provide recommendations for packages to be added to available <a href="https://github.com/cran-task-views/ctv#available-task-views" class="external-link">CRAN Task Views</a>.</p>
-<p>The <strong>CTVsuggest</strong> package has a single simple function: <code><a href="reference/CTVsuggest.html">CTVsuggest()</a></code>, that outputs suggestions. The model training is carried out by the <a href="https://dylandijk.github.io/CTVsuggestTrain/"><strong>CTVsuggestTrain</strong></a> package, for further detail on the workflow view the <a href="https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html#the-package-workflow">Packages Workflow Section</a> of the <a href="https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html">CTVsuggest Overview Vignette</a>.</p>
+<p>The <strong>CTVsuggest</strong> package has a single simple function: <code><a href="reference/CTVsuggest.html">CTVsuggest()</a></code>, that outputs package suggestions.</p>
+<p>The model training is carried out by the <a href="https://dylandijk.github.io/CTVsuggestTrain/"><strong>CTVsuggestTrain</strong></a> package, for further detail on the workflow view the <a href="https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html#the-package-workflow">Packages Workflow Section</a> of the <a href="https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html">CTVsuggest Overview Vignette</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of CTVsuggest from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of CTVsuggest from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"DylanDijk/CTVsuggest"</span><span class="op">)</span></span></code></pre></div>
@@ -81,7 +82,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p><code><a href="reference/CTVsuggest.html">CTVsuggest()</a></code> function takes a Task View name (<code>taskview</code>) and <code>n</code> as arguments. Then outputs a <code>data.frame</code> containing the top <code>n</code> recommendations for the chosen Task View (<code>taskview</code>).</p>
+<p><code><a href="reference/CTVsuggest.html">CTVsuggest()</a></code> function takes a Task View name (<code>taskview</code>) and <code>n</code> as arguments. Then outputs a <code>data.frame</code> containing the top <code>n</code> recommendations for the chosen Task View.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dylandijk.github.io/CTVsuggest/">CTVsuggest</a></span><span class="op">)</span></span>
 <span></span>
