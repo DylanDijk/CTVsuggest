@@ -3,4 +3,7 @@ template:
   bootstrap: 5
 deploy:
     install_metadata: true
-
+reference:
+- title:
+  contents:
+  - CTVsuggest

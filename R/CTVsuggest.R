@@ -3,7 +3,7 @@
 #' The `CTVsuggest()` function takes a Task View name and argument `n`,
 #' then outputs a [data.frame] containing the top `n` recommendations for the chosen Task View.
 #'
-#' The predicted probabilities are computed from the model object constructed with the [CTVsuggestTrain::Train_model()] function.
+#' The predicted probabilities are computed from the model object constructed with the [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) function.
 #'
 #' @param taskview A character vector with one element, must be one of the [Task Views available](https://github.com/cran-task-views/ctv#available-task-views)
 #' @param n An integer that decides the number of suggestions to show.
