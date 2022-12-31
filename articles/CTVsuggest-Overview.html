@@ -80,23 +80,25 @@
 <div class="section level2">
 <h2 id="ctvsuggest-package">CTVsuggest Package<a class="anchor" aria-label="anchor" href="#ctvsuggest-package"></a>
 </h2>
-<p>The aim of this package is to give suggestions for packages to be
-added to Task Views.</p>
-<p>There is a main function, <code><a href="../reference/CTVsuggest.html">CTVsuggest::CTVsuggest()</a></code>, that
-outputs these suggestions.</p>
+<p>The aim of CTVsuggest is to give suggestions for packages to be added
+to <a href="https://github.com/cran-task-views/ctv#available-task-views" class="external-link">CRAN
+Task Views</a>.</p>
+<p>There is a single function, <code><a href="../reference/CTVsuggest.html">CTVsuggest()</a></code>, that outputs
+these suggestions.</p>
+<!-- - The prediction probabilities are computed using [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) -->
 <div class="section level3">
 <h3 id="ctvsuggest-example">CTVsuggest Example<a class="anchor" aria-label="anchor" href="#ctvsuggest-example"></a>
 </h3>
 <!-- I have given the package and function the same name so that it is easy to remember, both are named **CTVsuggest**. -->
-<p>First install the <strong>CTVsuggest</strong> package:</p>
+<p>First install the CTVsuggest package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"DylanDijk/CTVsuggest"</span><span class="op">)</span></span></code></pre></div>
 <p>Then attach the package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dylandijk.github.io/CTVsuggest/">CTVsuggest</a></span><span class="op">)</span></span></code></pre></div>
-<p>To output the top 5 suggested packages for the
-<strong>NaturalLanguageProcessing</strong> Task View</p>
+<p>To output the top 5 suggested packages for the <a href="https://github.com/cran-task-views/NaturalLanguageProcessing/" class="external-link">NaturalLanguageProcessing
+Task View</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CTVsuggest.html">CTVsuggest</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, taskview <span class="op">=</span> <span class="st">"NaturalLanguageProcessing"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                NaturalLanguageProcessing       Packages</span></span>
@@ -109,18 +111,22 @@ outputs these suggestions.</p>
 <div class="section level3">
 <h3 id="the-package-workflow">The Package Workflow<a class="anchor" aria-label="anchor" href="#the-package-workflow"></a>
 </h3>
-<p>Alongside the <strong>CTVsuggest</strong> package there is the
-<strong>CTVsuggestTrain</strong> package that contains code which
-executes the training of the model.</p>
-<p>The current workflow is that I run the
-<code>CTVsuggestTrain::Train_model()</code> function, and then use the
-trained model to get predicted classification probabilities for
-packages. I find the classification probabilities for packages that are
-not assigned a Task View and that does not meet a monthly download
-threshold.</p>
-<p>I then store predicted probabilities on the <a href="https://github.com/DylanDijk/CTVsuggestTrain" class="external-link">CTVsuggestTrain</a>
-GitHub repo, the <strong>CTVsuggest</strong> package can then read this
-to output suggestions for different Task Views.</p>
+<p>Alongside the CTVsuggest package there is the <a href="https://dylandijk.github.io/CTVsuggestTrain/">CTVsuggestTrain</a>
+package.</p>
+<p>CTVsuggestTrain contains functions which execute the training of the
+model. In particular, <a href="https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html"><code>CTVsuggestTrain::Train_model()</code></a>
+trains a multinomial logistic regression model, where the outcome
+categories are the available CRAN Task Views plus an additional “None”
+category. In addition, after training the model,
+<code>Train_model()</code> returns a <code>data.frame</code> containing
+the predicted classification probabilities of CRAN packages to CRAN Task
+Views.</p>
+<p>The current workflow is that I run the <a href="https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html"><code>CTVsuggestTrain::Train_model()</code></a>
+function weekly, each time storing the <code>data.frame</code> of
+predicted probabilities on the <a href="https://github.com/DylanDijk/CTVsuggestTrain" class="external-link">CTVsuggestTrain
+GitHub repo</a>. The CTVsuggest package then loads this
+<code>data.frame</code> to <a href="#ctvsuggest-example">output
+suggestions for different Task Views</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="the-model">The Model<a class="anchor" aria-label="anchor" href="#the-model"></a>
