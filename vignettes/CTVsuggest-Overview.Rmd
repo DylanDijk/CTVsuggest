@@ -2,7 +2,7 @@
 title: "CTVsuggest Overview"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{CTVsuggest-Overview}
+  %\VignetteIndexEntry{CTVsuggest Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,11 +15,14 @@ knitr::opts_chunk$set(
 ```
 
 
-# CTVsuggest Package
+## Objective of the CTVsuggest Package
 
-The aim of CTVsuggest is to give suggestions for packages to be added to [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views).
+The [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views) are maintained by volunteers and are always welcome to contributions for
+additional content from members of the community. Due to the huge number of packages
+that are in CRAN it is infeasible for a Task View maintainer to review all of the available
+packages. Therefore, a [model](#the-model) that would give suggestions for the maintainer to then review would be useful.
 
-There is a single function, `CTVsuggest()`, that outputs these suggestions.
+The aim of CTVsuggest is to give suggestions for packages to be added to [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views). There is a single function, `CTVsuggest()`, that outputs these suggestions.
 
 <!-- - The prediction probabilities are computed using [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) -->
 
@@ -28,7 +31,7 @@ There is a single function, `CTVsuggest()`, that outputs these suggestions.
 <!-- I have given the package and function the same name so that it is easy to remember, both are named **CTVsuggest**. -->
 
 First install the CTVsuggest package:
-```{r, warning = FALSE, message = FALSE, results='hide'}
+```{r, warning = FALSE, message = FALSE, results='hide', eval=FALSE}
 library(devtools)
 install_github("DylanDijk/CTVsuggest")
 ```
@@ -49,61 +52,56 @@ CTVsuggest(n = 5, taskview = "NaturalLanguageProcessing")
 ## The Package Workflow
 Alongside the CTVsuggest package there is the [CTVsuggestTrain](https://dylandijk.github.io/CTVsuggestTrain/) package.  
 
-CTVsuggestTrain contains functions which execute the training of the model. In particular, [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) trains a multinomial logistic regression model, where the outcome categories are the available CRAN Task Views plus an additional "None" category. In addition, after training the model, `Train_model()` returns a `data.frame` containing the predicted classification probabilities of CRAN packages to CRAN Task Views.
+CTVsuggestTrain contains functions which execute the training of the model. In particular, [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) trains a multinomial logistic regression model, where the outcome categories are the available CRAN Task Views plus an additional `"none"` category. In addition, after training the model, `Train_model()` returns a `data.frame` containing the predicted classification probabilities of CRAN packages to CRAN Task Views.
 
-The current workflow is that I run the [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) function weekly, each time storing the `data.frame` of predicted probabilities on the [CTVsuggestTrain GitHub repo](https://github.com/DylanDijk/CTVsuggestTrain). The CTVsuggest package then loads this `data.frame` to [output suggestions for different Task Views](#ctvsuggest-example).
+The current workflow is that I run the [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) function weekly, each time storing the `data.frame` of predicted probabilities on the [CTVsuggestTrain GitHub repo](https://github.com/DylanDijk/CTVsuggestTrain). The CTVsuggest package then loads this `data.frame` to output suggestions for different Task Views as shown in the [example](#ctvsuggest-example).
 
 
 
 ## The Model
 
-I now give a high level view of how the model is trained.
-
-Look at the CTVsuggestTrain section or the CTVsuggestTrain package documentation for a more detailed description.
+I now provide a high level view of how the model is trained. The [CTVsuggestTrain Section](#ctvsuggesttrain) then provides an overview of the CTVsuggestTrain package which executes the model training, the section also contains links to the functions documentation and source code.
 
 
 ### Multinomial Logistic Regression
-The model aims to give a Task View suggestion after being giving some set of features of an unassigned package. There are packages that are assigned to multiple Task Views, but I have looked at classifying packages to a single Task View. Therefore, I have set this up as a multi-class classification problem, compared to a multi-label problem. 
+The model aims to give a Task View suggestion after being giving a set of features of an unassigned CRAN R package. There exist packages that are assigned to multiple Task Views, but I have looked at classifying packages to a single Task View. Therefore, I have set this up as a multi-class classification problem, compared to a multi-label problem. 
 
-However, it would not be reasonable to assign a Task View to every package.
-This would depart from the objective of Task Views, which is to give a sharp focus on packages that are needed for a task.
-For this reason, the model also has the possibility of assigning a package to no Task View. 
-Therefore, the number of possible labels in this classification problem is the number of Task Views + 1.
+However, it would not be reasonable to assign a Task View to every package. This would depart from the objective of Task Views^[[CRAN Task View Initiative](https://github.com/cran-task-views/ctv#cran-task-view-initiative-)], which is to give a sharp focus on packages that are needed for a task. For this reason, the model also has the possibility of assigning a package to no Task View. Therefore, I have included an additional `"none"` outcome category and hence the number of possible labels in this classification problem is the number of Task Views + 1.
 
-To perform this multi-class classification problem I have used **Multinomial Logistic Regression** with a LASSO penalty, trained using the `cv.glmnet` package.
+To perform this multi-class classification problem I have used a Multinomial Logistic model with a LASSO penalty, trained using the `glmnet::cv.glmnet()` function. The `cv.glmnet()` function performs cross-validation over a grid of lambda values, providing a measure of performance for each of the lambda values. I then select the model which has the lowest average multinomial deviance across the folds (`lambda.min`).
 
 ### Features
 
-I have used three different types of data to create the features for this model:
+In order to construct the Multinomial Logistic model, I need to create a set of features for the CRAN packages.
 
-- Text data from Package and Task View descriptions. $n$ Features
-- Package dependencies. $n + 1$ features
-- Other Packages developed by the Authors. $n + 1$ features
+I have used three different types of data to create the features for this model:  
+(I let $n$ denote the number of currently available Task Views)
 
-I have given the number of features constructed from each data type, where $n$ denotes the number of Task Views. 
+- [Text data from Package and Task View descriptions](#text-data-from-package-and-task-view-descriptions). $n$ features
+- [Package dependencies](#package-dependencies). $n + 1$ features
+- [Other Packages developed by the Authors](#authors-other-packages). $n + 1$ features
 
 I will now go into more detail into how I constructed features from this data.
 
-
-
 #### Text data from Package and Task View descriptions
 
-- Each package on CRAN has a title and description describing the purpose of the package 
-  - Example: [fxregime package web page](https://cran.r-project.org/web/packages/fxregime/index.html)
+
 - Each Task View has a page with text describing its scope
   - Example: [Econometrics Task View description](https://cran.r-project.org/web/views/Econometrics.html)
+- Each package on CRAN has a title and description describing the purpose of the package 
+  - Example: [fxregime package web page](https://cran.r-project.org/web/packages/fxregime/index.html)
 
-I extract the Task View text data from their corresponding markdown files ([Econometrics Task View Markdown file](https://github.com/cran-task-views/Econometrics/blob/main/Econometrics.md)) that exist within their GitHub repositories. All of the GitHub repositories can be found in the  [cran-task-views](https://github.com/cran-task-views) GitHub account.
 
+I extract the Task View text data from their corresponding markdown files, which are stored in the GitHub repository of the corresponding Task View.
 I also extract the titles and descriptions for each of the packages. I then measure the similarity between the package text to each Task View text to create $n$ features.
 
+<!-- For example the [Econometrics Task View Markdown file](https://github.com/cran-task-views/Econometrics/blob/main/Econometrics.md)   is stored in the  Econometrics GitHub repositor. All of the GitHub repositories can be found in the  [cran-task-views](https://github.com/cran-task-views) GitHub account. -->
 
 #### Package Dependencies
 
-For each package, I look at the immediate hard dependencies to other packages, and then calculate the proportion
-of the assignment of these packages to Task Views.
+For each package, I look at the immediate hard dependencies to other packages, and then calculate the proportion of the assignment of these packages to Task Views.
 
-#### Other Packages developed by the Authors
+#### Authors Other Packages
 
 For each package I look at all of the other packages created by the authors of that package. I then calculate the proportion of these packages that are assigned to each Task View.    
 
@@ -112,7 +110,7 @@ For each package I look at all of the other packages created by the authors of t
 
 To train and test the model I used packages that were assigned a Task View, I also used a set of packages which I labelled as not belonging to a Task View.
 The large proportion of packages not belonging to a Task View would have not been reviewed by Task View maintainers, and so would not be
-representative for packages belonging to the “None” category.Therefore to choose the packages to include that are labelled as belonging to the “None”
+representative for packages belonging to the `“none”` category.Therefore to choose the packages to include that are labelled as belonging to the `“none”`
 category, we select packages that have a high amount of monthly downloads
 
 Then from this set of packages I split it with an 80:20 ratio, into a training and testing set.
@@ -135,7 +133,7 @@ prediction is one of its assigned Task Views.
 ## CTVsuggestTrain
 
 First install the **CTVsuggestTrain** package:
-```{r, warning = FALSE, message = FALSE, results='hide', eval=FALSE}
+```{r, warning = FALSE, message = FALSE, results='hide'}
 library(devtools)
 install_github("DylanDijk/CTVsuggestTrain")
 ```
