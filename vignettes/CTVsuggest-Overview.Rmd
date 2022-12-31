@@ -17,16 +17,17 @@ knitr::opts_chunk$set(
 
 # CTVsuggest Package
 
-The aim of this package is to give suggestions for packages to be added to Task Views.
+The aim of CTVsuggest is to give suggestions for packages to be added to [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views).
 
-There is a main function, `CTVsuggest::CTVsuggest()`, that outputs these suggestions.
+There is a single function, `CTVsuggest()`, that outputs these suggestions.
 
+<!-- - The prediction probabilities are computed using [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) -->
 
 ## CTVsuggest Example
 
 <!-- I have given the package and function the same name so that it is easy to remember, both are named **CTVsuggest**. -->
 
-First install the **CTVsuggest** package:
+First install the CTVsuggest package:
 ```{r, warning = FALSE, message = FALSE, results='hide'}
 library(devtools)
 install_github("DylanDijk/CTVsuggest")
@@ -38,7 +39,7 @@ library(CTVsuggest)
 ```
 
 
-To output the top 5 suggested packages for the **NaturalLanguageProcessing** Task View 
+To output the top 5 suggested packages for the [NaturalLanguageProcessing Task View](https://github.com/cran-task-views/NaturalLanguageProcessing/).
 
 ```{r}
 CTVsuggest(n = 5, taskview = "NaturalLanguageProcessing")
@@ -46,11 +47,11 @@ CTVsuggest(n = 5, taskview = "NaturalLanguageProcessing")
 
 
 ## The Package Workflow
-Alongside the **CTVsuggest** package there is the **CTVsuggestTrain** package that contains code which executes the training of the model.
+Alongside the CTVsuggest package there is the [CTVsuggestTrain](https://dylandijk.github.io/CTVsuggestTrain/) package.  
 
-The current workflow is that I run the `CTVsuggestTrain::Train_model()` function, and then use the trained model to get predicted classification probabilities for packages. I find the classification probabilities for packages that are not assigned a Task View and that does not meet a monthly download threshold. 
+CTVsuggestTrain contains functions which execute the training of the model. In particular, [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) trains a multinomial logistic regression model, where the outcome categories are the available CRAN Task Views plus an additional "None" category. In addition, after training the model, `Train_model()` returns a `data.frame` containing the predicted classification probabilities of CRAN packages to CRAN Task Views.
 
-I then store predicted probabilities on the [CTVsuggestTrain](https://github.com/DylanDijk/CTVsuggestTrain) GitHub repo, the **CTVsuggest** package can then read this to output suggestions for different Task Views.
+The current workflow is that I run the [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) function weekly, each time storing the `data.frame` of predicted probabilities on the [CTVsuggestTrain GitHub repo](https://github.com/DylanDijk/CTVsuggestTrain). The CTVsuggest package then loads this `data.frame` to [output suggestions for different Task Views](#ctvsuggest-example).
 
 
 

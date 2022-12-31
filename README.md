@@ -6,16 +6,16 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The aim of **CTVsuggest** is to provide recommendations for packages to
-be added to available [CRAN Task
+The aim of CTVsuggest is to provide recommendations for packages to be
+added to available [CRAN Task
 Views](https://github.com/cran-task-views/ctv#available-task-views).
 
-The **CTVsuggest** package has a single simple function: `CTVsuggest()`,
+The CTVsuggest package has a single simple function: `CTVsuggest()`,
 that outputs package suggestions.
 
 The model training is carried out by the
-[**CTVsuggestTrain**](https://dylandijk.github.io/CTVsuggestTrain/)
-package, for further detail on the workflow view the [Packages Workflow
+[CTVsuggestTrain](https://dylandijk.github.io/CTVsuggestTrain/) package,
+for further detail on the workflow view the [Packages Workflow
 Section](https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html#the-package-workflow)
 of the [CTVsuggest Overview
 Vignette](https://dylandijk.github.io/CTVsuggest/articles/CTVsuggest-Overview.html).
