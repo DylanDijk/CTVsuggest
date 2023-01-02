@@ -31,7 +31,7 @@ The aim of CTVsuggest is to give suggestions for packages to be added to [CRAN T
 <!-- I have given the package and function the same name so that it is easy to remember, both are named **CTVsuggest**. -->
 
 First install the CTVsuggest package:
-```{r, warning = FALSE, message = FALSE, results='hide', eval=FALSE}
+```{r, warning = FALSE, message = FALSE, results='hide'}
 library(devtools)
 install_github("DylanDijk/CTVsuggest")
 ```
@@ -131,15 +131,14 @@ I output the predicted classification probabilities for the packages that are no
 The accuracy of the model can then be measured by comparing the trained model predictions with the testing set.
 
 In particular, I set the predicted Task View to be the one with the largest predicted probability. The accuracy is then measured as the
-proportion of correct predictions on the testing set. For packages that are assigned to multiple Task View, I set a prediction as accurate if its
+proportion of correct predictions on the testing set. For packages that are assigned to multiple Task Views, I set a prediction as accurate if its
 prediction is one of its assigned Task Views.
 
 ```{r, echo = FALSE, results='hide'}
 load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/model_accuracy.rda?raw=true"))
 ```
 
-
-The current (`r attr(model_accuracy, "date"))`) accuracy is: `r paste(round(model_accuracy,2))`%.
+The current (`r attr(model_accuracy, "date")`) accuracy is: `r paste(round(model_accuracy,2))`%.
 
 ## CTVsuggestTrain
 
@@ -158,7 +157,7 @@ As mentioned above, the training of the models is performed with the `CTVsuggest
 <!-- Then for each package I have calculated the cosine similarity between its text vector against all of the Task Views text vectors.  -->
 
 - [`get_create_features()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_create_features.html)
-- [`get_CRAN_logs()`]((https://dylandijk.github.io/CTVsuggestTrain/reference/get_CRAN_logs.html))
+- [`get_CRAN_logs()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_CRAN_logs.html)
 
 
 
