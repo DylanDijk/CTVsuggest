@@ -283,7 +283,9 @@ its prediction is one of its assigned Task Views.</p>
 <div class="section level2">
 <h2 id="ctvsuggesttrain">CTVsuggestTrain<a class="anchor" aria-label="anchor" href="#ctvsuggesttrain"></a>
 </h2>
-<p>First install the <strong>CTVsuggestTrain</strong> package:</p>
+<p>The <a href="https://dylandijk.github.io/CTVsuggestTrain/">CTVsuggestTrain</a>
+package contains all of the code used for the training of <a href="#the-model">model</a>.</p>
+<p>To install the <strong>CTVsuggestTrain</strong> package:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"DylanDijk/CTVsuggestTrain"</span><span class="op">)</span></span></code></pre></div>
@@ -300,7 +302,21 @@ order:</p>
 <li><p><a href="https://dylandijk.github.io/CTVsuggestTrain/reference/get_create_features.html"><code>get_create_features()</code></a></p></li>
 <li><p><a href="https://dylandijk.github.io/CTVsuggestTrain/reference/get_CRAN_logs.html"><code>get_CRAN_logs()</code></a></p></li>
 </ul>
-<!-- Due to the huge number of packages --><!-- that are in CRAN it is infeasible for a Task View maintainer to review all of the available --><!-- packages.Therefore, a model that would give a small selection of high quality suggestions --><!-- for the maintainer to then review would be useful. Such a model would also be useful from the perspective of a package developer. After --><!-- publishing their package onto CRAN, they could then check whether they should propose --><!-- their package to one of the Task View maintainers. --><!-- The model we want to construct should give a Task View suggestion after being giving --><!-- some set of features of an unassigned package. However, it would not be reasonable to --><!-- assign a Task View to every package. This would depart from the objective of Task Views, --><!-- which is to give a sharp focus on packages that are needed for a task. For this reason, the --><!-- model should also have the possibility of assigning a package to no Task View. --><!-- Consequently, the model should have a multicategory response variable, made up of 37 categories. The 36 Task Views with an --><!-- additional “None” category. -->
+<p>For a description of the steps taken by these function, view the
+details section of their documentation.</p>
+<!-- Due to the huge number of packages -->
+<!-- that are in CRAN it is infeasible for a Task View maintainer to review all of the available -->
+<!-- packages.Therefore, a model that would give a small selection of high quality suggestions -->
+<!-- for the maintainer to then review would be useful. Such a model would also be useful from the perspective of a package developer. After -->
+<!-- publishing their package onto CRAN, they could then check whether they should propose -->
+<!-- their package to one of the Task View maintainers. -->
+<!-- The model we want to construct should give a Task View suggestion after being giving -->
+<!-- some set of features of an unassigned package. However, it would not be reasonable to -->
+<!-- assign a Task View to every package. This would depart from the objective of Task Views, -->
+<!-- which is to give a sharp focus on packages that are needed for a task. For this reason, the -->
+<!-- model should also have the possibility of assigning a package to no Task View. -->
+<!-- Consequently, the model should have a multicategory response variable, made up of 37 categories. The 36 Task Views with an -->
+<!-- additional “None” category. -->
 </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
