@@ -142,7 +142,9 @@ The current (`r attr(model_accuracy, "date")`) accuracy is: `r paste(round(model
 
 ## CTVsuggestTrain
 
-First install the **CTVsuggestTrain** package:
+The [CTVsuggestTrain](https://dylandijk.github.io/CTVsuggestTrain/) package contains all of the code used for the training of [model](#the-model).
+
+To install the **CTVsuggestTrain** package:
 ```{r, warning = FALSE, message = FALSE, results='hide', eval = FALSE}
 library(devtools)
 install_github("DylanDijk/CTVsuggestTrain")
@@ -159,7 +161,7 @@ As mentioned above, the training of the models is performed with the `CTVsuggest
 - [`get_create_features()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_create_features.html)
 - [`get_CRAN_logs()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_CRAN_logs.html)
 
-
+For a description of the steps taken by these function, view the details section of their documentation.
 
 
 
