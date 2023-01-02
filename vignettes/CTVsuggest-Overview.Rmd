@@ -42,7 +42,7 @@ library(CTVsuggest)
 ```
 
 
-To output the top 5 suggested packages for the [NaturalLanguageProcessing Task View](https://github.com/cran-task-views/NaturalLanguageProcessing/).
+To output the top 5 suggested packages for the [NaturalLanguageProcessing Task View](https://github.com/cran-task-views/NaturalLanguageProcessing/):
 
 ```{r}
 CTVsuggest(n = 5, taskview = "NaturalLanguageProcessing")
@@ -54,7 +54,7 @@ Alongside the CTVsuggest package there is the [CTVsuggestTrain](https://dylandij
 
 CTVsuggestTrain contains functions which execute the training of the model. In particular, [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) trains a multinomial logistic regression model, where the outcome categories are the available CRAN Task Views plus an additional `"none"` category. In addition, after training the model, `Train_model()` returns a `data.frame` containing the predicted classification probabilities of CRAN packages to CRAN Task Views.
 
-The current workflow is that I run the [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) function weekly, each time storing the `data.frame` of predicted probabilities on the [CTVsuggestTrain GitHub repo](https://github.com/DylanDijk/CTVsuggestTrain). The CTVsuggest package then loads this `data.frame` to output suggestions for different Task Views as shown in the [example](#ctvsuggest-example).
+The current workflow is that I run the [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) function weekly, each time storing the `data.frame` of predicted probabilities on the [CTVsuggestTrain GitHub repo](https://github.com/DylanDijk/CTVsuggestTrain). The CTVsuggest package then loads this `data.frame` to output suggestions for different Task Views, as shown in the [example](#ctvsuggest-example).
 
 
 
@@ -62,20 +62,21 @@ The current workflow is that I run the [`CTVsuggestTrain::Train_model()`](https:
 
 I now provide a high level view of how the model is trained. The [CTVsuggestTrain Section](#ctvsuggesttrain) then provides an overview of the CTVsuggestTrain package which executes the model training, the section also contains links to the functions documentation and source code.
 
+For a more comprehensive description of the model building process, view [Section 4](https://dylandijk.github.io/assets/pdf/Dissertation.pdf#page=39&zoom=100,94,101) of a long form report.
 
 ### Multinomial Logistic Regression
 The model aims to give a Task View suggestion after being giving a set of features of an unassigned CRAN R package. There exist packages that are assigned to multiple Task Views, but I have looked at classifying packages to a single Task View. Therefore, I have set this up as a multi-class classification problem, compared to a multi-label problem. 
 
-However, it would not be reasonable to assign a Task View to every package. This would depart from the objective of Task Views^[[CRAN Task View Initiative](https://github.com/cran-task-views/ctv#cran-task-view-initiative-)], which is to give a sharp focus on packages that are needed for a task. For this reason, the model also has the possibility of assigning a package to no Task View. Therefore, I have included an additional `"none"` outcome category and hence the number of possible labels in this classification problem is the number of Task Views + 1.
+However, it would not be reasonable to assign a Task View to every package. This would depart from the objective of Task Views, which is to give a sharp focus on packages that are needed for a task^[[CRAN Task View Initiative](https://github.com/cran-task-views/ctv#cran-task-view-initiative-)]. For this reason, the model also has the possibility of assigning a package to no Task View. Therefore, I have included an additional `"none"` outcome category and hence the number of possible labels in this classification problem is the number of Task Views + 1.
 
-To perform this multi-class classification problem I have used a Multinomial Logistic model with a LASSO penalty, trained using the `glmnet::cv.glmnet()` function. The `cv.glmnet()` function performs cross-validation over a grid of lambda values, providing a measure of performance for each of the lambda values. I then select the model which has the lowest average multinomial deviance across the folds (`lambda.min`).
+To perform this multi-class classification problem I have used a multinomial logistic model with a LASSO penalty, trained using the `glmnet::cv.glmnet()` function. The `cv.glmnet()` function performs cross-validation over a grid of lambda values, providing a measure of performance for each of the lambda values. I then select the model which has the lowest average multinomial deviance across the folds (`lambda.min`).
 
 ### Features
 
-In order to construct the Multinomial Logistic model, I need to create a set of features for the CRAN packages.
+In order to construct the multinomial logistic model, I need to create a set of features for each of the CRAN packages.
 
 I have used three different types of data to create the features for this model:  
-(I let $n$ denote the number of currently available Task Views)
+(I let $n$ denote the number of currently available [Task Views](https://github.com/cran-task-views/ctv#available-task-views))
 
 - [Text data from Package and Task View descriptions](#text-data-from-package-and-task-view-descriptions). $n$ features
 - [Package dependencies](#package-dependencies). $n + 1$ features
@@ -93,27 +94,32 @@ I will now go into more detail into how I constructed features from this data.
 
 
 I extract the Task View text data from their corresponding markdown files, which are stored in the GitHub repository of the corresponding Task View.
-I also extract the titles and descriptions for each of the packages. I then measure the similarity between the package text to each Task View text to create $n$ features.
+I also extract the titles and descriptions for each of the packages. I then vectorize the texts using the TF-IDF method, and compute the cosine
+similarity of the vectorized package text to each of the vectorized Task View text to create $n$ features.
 
+View [Section 3.3.2](https://dylandijk.github.io/assets/pdf/Dissertation.pdf#page=34&zoom=100,94,142) for a detailed description of the text vectorization.
 <!-- For example the [Econometrics Task View Markdown file](https://github.com/cran-task-views/Econometrics/blob/main/Econometrics.md)   is stored in the  Econometrics GitHub repositor. All of the GitHub repositories can be found in the  [cran-task-views](https://github.com/cran-task-views) GitHub account. -->
 
 #### Package Dependencies
 
-For each package, I look at the immediate hard dependencies to other packages, and then calculate the proportion of the assignment of these packages to Task Views.
+For each package, I look at the immediate hard dependencies^[[Description of R package hard dependencies](https://dylandijk.github.io/assets/pdf/Dissertation.pdf#page=7&zoom=100,94,101)] to other packages, and then calculate the proportion of the assignment of these packages to Task Views. This creates $n + 1$ features for each CRAN R package.
 
 #### Authors Other Packages
 
-For each package I look at all of the other packages created by the authors of that package. I then calculate the proportion of these packages that are assigned to each Task View.    
+For each package I look at all of the other packages created by the authors of that package. I then calculate the proportion of these packages that are assigned to each Task View. This creates another $n + 1$ features for each CRAN R package. 
 
 
 ### Training Data
 
 To train and test the model I used packages that were assigned a Task View, I also used a set of packages which I labelled as not belonging to a Task View.
+
 The large proportion of packages not belonging to a Task View would have not been reviewed by Task View maintainers, and so would not be
-representative for packages belonging to the `“none”` category.Therefore to choose the packages to include that are labelled as belonging to the `“none”`
-category, we select packages that have a high amount of monthly downloads
+representative for packages belonging to the `"none"` category. Therefore to choose the packages to include that are labelled as belonging to the `"none"`
+category, we select packages that have a high amount of monthly downloads.
 
 Then from this set of packages I split it with an 80:20 ratio, into a training and testing set.
+
+View [Section 4.3.1](https://dylandijk.github.io/assets/pdf/Dissertation.pdf#page=42&zoom=100,94,132) for a detailed description of how the training and testing sets are constructed.
 
 ### Predictions
 
@@ -128,26 +134,31 @@ In particular, I set the predicted Task View to be the one with the largest pred
 proportion of correct predictions on the testing set. For packages that are assigned to multiple Task View, I set a prediction as accurate if its
 prediction is one of its assigned Task Views.
 
+```{r, echo = FALSE, results='hide'}
+load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/model_accuracy.rda?raw=true"))
+```
 
+
+The current (`r attr(model_accuracy, "date"))`) accuracy is: `r paste(round(model_accuracy,2))`%.
 
 ## CTVsuggestTrain
 
 First install the **CTVsuggestTrain** package:
-```{r, warning = FALSE, message = FALSE, results='hide'}
+```{r, warning = FALSE, message = FALSE, results='hide', eval = FALSE}
 library(devtools)
 install_github("DylanDijk/CTVsuggestTrain")
 ```
 
 As mentioned above, the training of the models is performed with the `CTVsuggestTrain::Train_model()` function. This function uses four internal functions of the CTVsuggestTrain package which are run in order: 
 
-- `get_data()`
-- `get_NLP()`
+- [`get_data()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_data.html)
+- [`get_NLP()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_NLP.html)
 <!-- Using all of the text from the Task View I have created a corpus. Then for each word I calculated the term frequency -->
 <!-- For each package I have combined the title and description text, then I have vectorised this text as well as the Task View text. -->
 <!-- Then for each package I have calculated the cosine similarity between its text vector against all of the Task Views text vectors.  -->
 
-- `get_create_features()`
-- `get_CRAN_logs()`
+- [`get_create_features()`](https://dylandijk.github.io/CTVsuggestTrain/reference/get_create_features.html)
+- [`get_CRAN_logs()`]((https://dylandijk.github.io/CTVsuggestTrain/reference/get_CRAN_logs.html))
 
 
 
