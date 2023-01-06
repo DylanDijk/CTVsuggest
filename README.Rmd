@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # CTVsuggest
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/DylanDijk/CTVsuggest/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DylanDijk/CTVsuggest/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The aim of CTVsuggest is to provide recommendations for packages to be added to available [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views).  

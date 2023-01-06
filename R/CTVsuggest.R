@@ -14,9 +14,8 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' CTVsuggest(taskview = "Econometrics", n = 5)
-#'}
+#'
 #'
 #'
 

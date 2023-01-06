@@ -4,6 +4,8 @@
 # CTVsuggest
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/DylanDijk/CTVsuggest/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DylanDijk/CTVsuggest/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The aim of CTVsuggest is to provide recommendations for packages to be
@@ -40,9 +42,9 @@ library(CTVsuggest)
 
 CTVsuggest(taskview = "NaturalLanguageProcessing", n = 5)
 #>                NaturalLanguageProcessing       Packages
-#> LSX                            0.9929149            LSX
-#> doc2vec                        0.9819230        doc2vec
-#> text.alignment                 0.9626282 text.alignment
-#> jiebaRD                        0.9530279        jiebaRD
-#> R.temis                        0.9166350        R.temis
+#> LSX                            0.9981190            LSX
+#> doc2vec                        0.9917591        doc2vec
+#> jiebaRD                        0.9835720        jiebaRD
+#> text.alignment                 0.9726128 text.alignment
+#> R.temis                        0.9644548        R.temis
 ```

@@ -19,12 +19,11 @@ The \code{CTVsuggest()} function takes a Task View name and argument \code{n},
 then outputs a \link{data.frame} containing the top \code{n} recommendations for the chosen Task View.
 }
 \details{
-The predicted probabilities are computed from the model object constructed with the \code{\link[CTVsuggestTrain:Train_model]{CTVsuggestTrain::Train_model()}} function.
+The predicted probabilities are computed from the model object constructed with the \href{https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html}{\code{CTVsuggestTrain::Train_model()}} function.
 }
 \examples{
-\donttest{
 CTVsuggest(taskview = "Econometrics", n = 5)
-}
+
 
 
 }
