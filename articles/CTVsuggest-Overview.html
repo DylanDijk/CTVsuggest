@@ -81,9 +81,9 @@
 <h2 id="objective-of-the-ctvsuggest-package">Objective of the CTVsuggest Package<a class="anchor" aria-label="anchor" href="#objective-of-the-ctvsuggest-package"></a>
 </h2>
 <p>The <a href="https://github.com/cran-task-views/ctv#available-task-views" class="external-link">CRAN
-Task Views</a> are maintained by volunteers and are always welcome to
+Task Views</a> are maintained by volunteers, and are always welcome to
 contributions for additional content from members of the community. Due
-to the huge number of packages that are in CRAN it is infeasible for a
+to the huge number of packages that are in CRAN, it is infeasible for a
 Task View maintainer to review all of the available packages. Therefore,
 a <a href="#the-model">model</a> that would give suggestions for the
 maintainer to then review would be useful.</p>
@@ -109,16 +109,16 @@ Task View</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CTVsuggest.html">CTVsuggest</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, taskview <span class="op">=</span> <span class="st">"NaturalLanguageProcessing"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                NaturalLanguageProcessing       Packages</span></span>
-<span><span class="co">#&gt; LSX                            0.9981190            LSX</span></span>
-<span><span class="co">#&gt; doc2vec                        0.9917591        doc2vec</span></span>
-<span><span class="co">#&gt; jiebaRD                        0.9835720        jiebaRD</span></span>
-<span><span class="co">#&gt; text.alignment                 0.9726128 text.alignment</span></span>
-<span><span class="co">#&gt; R.temis                        0.9644548        R.temis</span></span></code></pre></div>
+<span><span class="co">#&gt; LSX                            0.9938814            LSX</span></span>
+<span><span class="co">#&gt; doc2vec                        0.9826798        doc2vec</span></span>
+<span><span class="co">#&gt; R.temis                        0.9642001        R.temis</span></span>
+<span><span class="co">#&gt; jiebaRD                        0.9559108        jiebaRD</span></span>
+<span><span class="co">#&gt; text.alignment                 0.9435393 text.alignment</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="the-package-workflow">The Package Workflow<a class="anchor" aria-label="anchor" href="#the-package-workflow"></a>
 </h2>
-<p>Alongside the CTVsuggest package there is the <a href="https://dylandijk.github.io/CTVsuggestTrain/">CTVsuggestTrain</a>
+<p>Alongside the CTVsuggest package, there is the <a href="https://dylandijk.github.io/CTVsuggestTrain/">CTVsuggestTrain</a>
 package.</p>
 <p>CTVsuggestTrain contains functions which execute the training of the
 model. In particular, <a href="https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html"><code>CTVsuggestTrain::Train_model()</code></a>
@@ -277,7 +277,7 @@ largest predicted probability. The accuracy is then measured as the
 proportion of correct predictions on the testing set. For packages that
 are assigned to multiple Task Views, I set a prediction as accurate if
 its prediction is one of its assigned Task Views.</p>
-<p>The current (2023-01-03) accuracy is: 82.51%.</p>
+<p>The current (2023-03-20 08:35:44) accuracy is: 81.46%.</p>
 </div>
 </div>
 <div class="section level2">
