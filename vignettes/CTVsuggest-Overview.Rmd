@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 
 ## Objective of the CTVsuggest Package
 
-The [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views) are maintained by volunteers and are always welcome to contributions for
+The [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views) are maintained by volunteers, and are always welcome to contributions for
 additional content from members of the community. Due to the huge number of packages
-that are in CRAN it is infeasible for a Task View maintainer to review all of the available
+that are in CRAN, it is infeasible for a Task View maintainer to review all of the available
 packages. Therefore, a [model](#the-model) that would give suggestions for the maintainer to then review would be useful.
 
 The aim of CTVsuggest is to give suggestions for packages to be added to [CRAN Task Views](https://github.com/cran-task-views/ctv#available-task-views). There is a single function, `CTVsuggest()`, that outputs these suggestions.
@@ -50,7 +50,7 @@ CTVsuggest(n = 5, taskview = "NaturalLanguageProcessing")
 
 
 ## The Package Workflow
-Alongside the CTVsuggest package there is the [CTVsuggestTrain](https://dylandijk.github.io/CTVsuggestTrain/) package.  
+Alongside the CTVsuggest package, there is the [CTVsuggestTrain](https://dylandijk.github.io/CTVsuggestTrain/) package.  
 
 CTVsuggestTrain contains functions which execute the training of the model. In particular, [`CTVsuggestTrain::Train_model()`](https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html) trains a multinomial logistic regression model, where the outcome categories are the available CRAN Task Views plus an additional `"none"` category. In addition, after training the model, `Train_model()` returns a `data.frame` containing the predicted classification probabilities of CRAN packages to CRAN Task Views.
 
