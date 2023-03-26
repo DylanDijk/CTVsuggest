@@ -20,12 +20,18 @@
 #'
 
 
-CTVsuggest = function(taskview = "Econometrics", n = 5){
-
+CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL){
 
 load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_for_suggestions.rda?raw=true"))
 
-  suggestions = predicted_probs_for_suggestions[,c(paste0(taskview), "Packages"), drop = F][order(predicted_probs_for_suggestions[,paste0(taskview)], decreasing = T),, drop = F][1:n,]
+  suggestions = predicted_probs_for_suggestions[,c(paste0(taskview), "Packages"), drop = F][order(predicted_probs_for_suggestions[,paste0(taskview)], decreasing = T),, drop = F][1:(n+length(ignore)),]
+
+    if(!is.null(ignore)){
+      suggestions = suggestions[!(rownames(suggestions) %in% ignore),]
+    }
+
+  suggestions = suggestions[1:n,]
+
   return(suggestions)
 }
 
