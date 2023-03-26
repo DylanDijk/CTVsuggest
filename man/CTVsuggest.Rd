@@ -4,12 +4,14 @@
 \alias{CTVsuggest}
 \title{Output CRAN Task View suggestions}
 \usage{
-CTVsuggest(taskview = "Econometrics", n = 5)
+CTVsuggest(taskview = "Econometrics", n = 5, ignore = NULL)
 }
 \arguments{
 \item{taskview}{A character vector with one element, must be one of the \href{https://github.com/cran-task-views/ctv#available-task-views}{Task Views available}}
 
 \item{n}{An integer that decides the number of suggestions to show.}
+
+\item{ignore}{A character vector of package names that you want to ignore from output suggestions.}
 }
 \value{
 A \link{data.frame} with suggested packages and there classification probability.
@@ -22,7 +24,9 @@ then outputs a \link{data.frame} containing the top \code{n} recommendations for
 The predicted probabilities are computed from the model object constructed with the \href{https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html}{\code{CTVsuggestTrain::Train_model()}} function.
 }
 \examples{
-CTVsuggest(taskview = "Econometrics", n = 5)
+# The following outputs the top 5 suggestions for the Econometrics Task View,
+# and in this example the GVARX package is ignored and will not appear in suggestions.
+CTVsuggest(taskview = "Econometrics", n = 5, ignore = "GVARX")
 
 
 

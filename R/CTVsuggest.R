@@ -7,6 +7,7 @@
 #'
 #' @param taskview A character vector with one element, must be one of the [Task Views available](https://github.com/cran-task-views/ctv#available-task-views)
 #' @param n An integer that decides the number of suggestions to show.
+#' @param ignore A character vector of package names that you want to ignore from output suggestions.
 #'
 #' @return A [data.frame] with suggested packages and there classification probability.
 #'
@@ -14,7 +15,9 @@
 #'
 #'
 #' @examples
-#' CTVsuggest(taskview = "Econometrics", n = 5)
+#' # The following outputs the top 5 suggestions for the Econometrics Task View,
+#' # and in this example the GVARX package is ignored and will not appear in suggestions.
+#' CTVsuggest(taskview = "Econometrics", n = 5, ignore = "GVARX")
 #'
 #'
 #'
