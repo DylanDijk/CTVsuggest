@@ -57,7 +57,7 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,10 +68,6 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
 <dt>n</dt>
 <dd><p>An integer that decides the number of suggestions to show.</p></dd>
-
-
-<dt>ignore</dt>
-<dd><p>A character vector of package names that you want to ignore from output suggestions.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -87,15 +83,13 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The following outputs the top 5 suggestions for the Econometrics Task View,</span></span></span>
-<span class="r-in"><span><span class="co"># and in this example the GVARX package is ignored and will not appear in suggestions.</span></span></span>
-<span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="st">"GVARX"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Econometrics  Packages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> JFE          0.9992929       JFE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iClick       0.9961433    iClick</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wildrwolf    0.9949832 wildrwolf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gbmt         0.9949343      gbmt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iForecast    0.9937594 iForecast</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Econometrics Packages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GVARX     0.9932598    GVARX</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> bgw       0.9894208      bgw</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iClick    0.9891839   iClick</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gbmt      0.9875730     gbmt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> JFE       0.9873618      JFE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
