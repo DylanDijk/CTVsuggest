@@ -15,27 +15,35 @@
 #'
 #'
 #' @examples
-#' # The following outputs the top 5 suggestions for the Econometrics Task View,
-#' # and in this example the GVARX package is ignored and will not appear in suggestions.
+#' # Output top 5 suggestions for the Econometrics Task View,
+#' # whilst hiding the GVARX package from suggestions.
 #' CTVsuggest(taskview = "Econometrics", n = 5, ignore = "GVARX")
 #'
-#'
-#'
+#' # Output predicted probabilities for the task view assignment of the doc2vec package
+#' CTVsuggest(package = "doc2vec")
 
 
-CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL){
+CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package = NA){
 
 load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_for_suggestions.rda?raw=true"))
 
-  suggestions = predicted_probs_for_suggestions[,c(paste0(taskview), "Packages"), drop = F][order(predicted_probs_for_suggestions[,paste0(taskview)], decreasing = T),, drop = F][1:(n+length(ignore)),]
+  # Outputting probability vector for a package
+  if(!is.na(package)){
+    package_prob = as.matrix(predicted_probs_for_suggestions[package,-which(colnames(predicted_probs_for_suggestions) == "Packages"), drop = F])
+    package_prob = round(package_prob,4)
+    package_prob = package_prob[,order(package_prob)]
+    return(package_prob)
+  # Outputting packages with highest probabilities for a Task View
+  } else {
+    suggestions = predicted_probs_for_suggestions[,c(paste0(taskview), "Packages"), drop = F][order(predicted_probs_for_suggestions[,paste0(taskview)], decreasing = T),, drop = F][1:(n+length(ignore)),]
 
-    if(!is.null(ignore)){
-      suggestions = suggestions[!(rownames(suggestions) %in% ignore),]
-    }
+      if(!is.null(ignore)){
+        suggestions = suggestions[!(rownames(suggestions) %in% ignore),]
+      }
+    suggestions = suggestions[1:n,]
 
-  suggestions = suggestions[1:n,]
-
-  return(suggestions)
+    return(suggestions)
+  }
 }
 
 # load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/model_accuracy.rda?raw=true"))
