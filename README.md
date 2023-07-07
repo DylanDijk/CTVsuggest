@@ -10,7 +10,8 @@
 
 The aim of CTVsuggest is to provide recommendations for packages to be
 added to available [CRAN Task
-Views](https://github.com/cran-task-views/ctv#available-task-views).
+Views](https://github.com/cran-task-views/ctv#available-task-views).  
+This R package is based on follow up work of my 4<sup>th</sup> year university [dissertation](https://dylandijk.github.io/assets/pdf/Dissertation.pdf) supervised by [Ioannis Kosmidis](https://www.ikosmidis.com/)
 
 The CTVsuggest R package has a single simple function: `CTVsuggest()`,
 that outputs package suggestions.
