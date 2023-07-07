@@ -57,7 +57,7 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="cn">NULL</span>, package <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -87,9 +87,10 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The following outputs the top 5 suggestions for the Econometrics Task View,</span></span></span>
-<span class="r-in"><span><span class="co"># and in this example the GVARX package is ignored and will not appear in suggestions.</span></span></span>
-<span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="st">"GVARX"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Outputting top 5 suggestions for the Econometrics Task View,</span></span></span>
+<span class="r-in"><span><span class="co"># whilst ignoring the GVARX package, that is GVARX will not appear in the suggestions.</span></span></span>
+<span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>,</span></span>
+<span class="r-in"><span>           n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="st">"GVARX"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Econometrics  Packages</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> iForecast    0.9964104 iForecast</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> iClick       0.9956785    iClick</span>
@@ -97,7 +98,7 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 <span class="r-out co"><span class="r-pr">#&gt;</span> JFE          0.9942669       JFE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bgw          0.9926270       bgw</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
