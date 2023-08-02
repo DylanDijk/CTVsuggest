@@ -25,16 +25,20 @@
 
 CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package = NA){
 
-load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_for_suggestions.rda?raw=true"))
-
   # Outputting probability vector for a package
   if(!is.na(package)){
-    package_prob = as.matrix(predicted_probs_for_suggestions[package,-which(colnames(predicted_probs_for_suggestions) == "Packages"), drop = F])
+
+    load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_all.rda?raw=true"))
+
+    package_prob = as.matrix(predicted_probs_all[package,-which(colnames(predicted_probs_all) == "Packages"), drop = F])
     package_prob = round(package_prob,4)
     package_prob = package_prob[,order(package_prob)]
     return(package_prob)
   # Outputting packages with highest probabilities for a Task View
   } else {
+
+    load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_for_suggestions.rda?raw=true"))
+
     suggestions = predicted_probs_for_suggestions[,c(paste0(taskview), "Packages"), drop = F][order(predicted_probs_for_suggestions[,paste0(taskview)], decreasing = T),, drop = F][1:(n+length(ignore)),]
 
       if(!is.null(ignore)){
