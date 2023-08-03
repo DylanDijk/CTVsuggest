@@ -23,10 +23,10 @@
 #' CTVsuggest(package = "doc2vec")
 
 
-CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package = NA){
+CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package = NA, ranktaskview = NA){
 
-  # Outputting probability vector for a package
   if(!is.na(package)){
+    # Outputting probability vector for a package
 
     load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_all.rda?raw=true"))
 
@@ -34,8 +34,18 @@ CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package =
     package_prob = round(package_prob,4)
     package_prob = package_prob[,order(package_prob)]
     return(package_prob)
-  # Outputting packages with highest probabilities for a Task View
+
+  } else if (!is.na(ranktaskview)) {
+    # ranking packages within a Task View
+
+    load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_all.rda?raw=true"))
+
+    # need to load in packages from that Task View
+
+
+
   } else {
+    # Outputting packages with highest probabilities for a Task View
 
     load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_for_suggestions.rda?raw=true"))
 
