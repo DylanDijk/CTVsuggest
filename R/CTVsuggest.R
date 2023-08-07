@@ -41,8 +41,11 @@ CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package =
     load(url("https://github.com/DylanDijk/CTVsuggestTrain/blob/main/OUTPUT/predicted_probs_all.rda?raw=true"))
 
     # need to load in packages from that Task View
-
-
+    tvdb = CTVsuggest:::download_taskview_data()
+    task_view_packages = Reduce(c,RWsearch::tvdb_pkgs(char = ranktaskview, tvdb = tvdb))
+    task_view_packages = unique(task_view_packages)
+    pckgs_ranked = predicted_probs_all[task_view_packages,ranktaskview, drop = F]
+    pckgs_ranked = pckgs_ranked[order(pckgs_ranked[,paste0(ranktaskview)], decreasing = T),,drop = F]
 
   } else {
     # Outputting packages with highest probabilities for a Task View
