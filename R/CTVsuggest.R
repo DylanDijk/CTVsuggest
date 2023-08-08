@@ -47,6 +47,8 @@ CTVsuggest = function(taskview = "Econometrics", n = 5, ignore = NULL, package =
     pckgs_ranked = predicted_probs_all[task_view_packages,ranktaskview, drop = F]
     pckgs_ranked = pckgs_ranked[order(pckgs_ranked[,paste0(ranktaskview)], decreasing = T),,drop = F]
 
+    return(pckgs_ranked)
+
   } else {
     # Outputting packages with highest probabilities for a Task View
 
