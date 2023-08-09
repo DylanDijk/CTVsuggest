@@ -4,7 +4,13 @@
 \alias{CTVsuggest}
 \title{Output CRAN Task View suggestions}
 \usage{
-CTVsuggest(taskview = "Econometrics", n = 5, ignore = NULL, package = NA)
+CTVsuggest(
+  taskview = "Econometrics",
+  n = 5,
+  ignore = NULL,
+  package = NA,
+  ranktaskview = NA
+)
 }
 \arguments{
 \item{taskview}{A character vector with one element, must be one of the \href{https://github.com/cran-task-views/ctv#available-task-views}{Task Views available}}
@@ -24,11 +30,10 @@ then outputs a \link{data.frame} containing the top \code{n} recommendations for
 The predicted probabilities are computed from the model object constructed with the \href{https://dylandijk.github.io/CTVsuggestTrain/reference/Train_model.html}{\code{CTVsuggestTrain::Train_model()}} function.
 }
 \examples{
-# Outputting top 5 suggestions for the Econometrics Task View,
-# whilst ignoring the GVARX package, that is GVARX will not appear in the suggestions.
-CTVsuggest(taskview = "Econometrics",
-           n = 5, ignore = "GVARX")
+# Output top 5 suggestions for the Econometrics Task View,
+# whilst hiding the GVARX package from suggestions.
+CTVsuggest(taskview = "Econometrics", n = 5, ignore = "GVARX")
 
-#
-
+# Output predicted probabilities for the task view assignment of the doc2vec package
+CTVsuggest(package = "doc2vec")
 }

@@ -15,4 +15,5 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://dylandijk.github.io/CTVsuggest/, https://github.com/dylandijk/CTVsuggest
 Imports: 
-    devtools
+    devtools,
+    RWsearch
