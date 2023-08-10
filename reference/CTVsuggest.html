@@ -57,7 +57,13 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="cn">NULL</span>, package <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CTVsuggest</span><span class="op">(</span></span>
+<span>  taskview <span class="op">=</span> <span class="st">"Econometrics"</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  ignore <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  package <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  ranktaskview <span class="op">=</span> <span class="cn">NA</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -73,6 +79,14 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 <dt>ignore</dt>
 <dd><p>A character vector of package names that you want to ignore from output suggestions.</p></dd>
 
+
+<dt>package</dt>
+<dd><p>A string, that is a package name that is on CRAN.</p></dd>
+
+
+<dt>ranktaskview</dt>
+<dd><p>A character vector with one element, must be one of the <a href="https://github.com/cran-task-views/ctv#available-task-views" class="external-link">Task Views available</a></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -87,10 +101,9 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Outputting top 5 suggestions for the Econometrics Task View,</span></span></span>
-<span class="r-in"><span><span class="co"># whilst ignoring the GVARX package, that is GVARX will not appear in the suggestions.</span></span></span>
-<span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>,</span></span>
-<span class="r-in"><span>           n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="st">"GVARX"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Output top 5 suggestions for the Econometrics Task View,</span></span></span>
+<span class="r-in"><span><span class="co"># whilst hiding the GVARX package from suggestions.</span></span></span>
+<span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>taskview <span class="op">=</span> <span class="st">"Econometrics"</span>, n <span class="op">=</span> <span class="fl">5</span>, ignore <span class="op">=</span> <span class="st">"GVARX"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Econometrics  Packages</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gbmt         0.9981427      gbmt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> iForecast    0.9979058 iForecast</span>
@@ -98,8 +111,38 @@ then outputs a <a href="https://rdrr.io/r/base/data.frame.html" class="external-
 <span class="r-out co"><span class="r-pr">#&gt;</span> ecic         0.9970962      ecic</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> hdflex       0.9964858    hdflex</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Output predicted probabilities for the task view assignment of the doc2vec package</span></span></span>
+<span class="r-in"><span><span class="fu">CTVsuggest</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"doc2vec"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               Agriculture                  Bayesian           CausalInference </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  ChemPhys            ClinicalTrials                   Cluster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Databases     DifferentialEquations             Distributions </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Econometrics            Environmetrics              Epidemiology </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        ExperimentalDesign              ExtremeValue                   Finance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            FunctionalData           GraphicalModels  HighPerformanceComputing </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Hydrology           MachineLearning            MedicalImaging </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              MetaAnalysis               MissingData               MixedModels </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           ModelDeployment      NumericalMathematics        OfficialStatistics </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Omics              Optimization          Pharmacokinetics </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Phylogenetics             Psychometrics      ReproducibleResearch </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    Robust                   Spatial            SpatioTemporal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           SportsAnalytics                  Survival        TeachingStatistics </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                TimeSeries                  Tracking           WebTechnologies </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0000                    0.0000                    0.0000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      none NaturalLanguageProcessing </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    0.0063                    0.9936 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
