@@ -17,5 +17,5 @@ This is a modification of the RWsearch::tvdb_down function, this modified versio
 Default option is to extract Task View data from CRAN Task View repository: "https://cran.rstudio.com/src/contrib/Views.rds"
 }
 \details{
-This function also exists in the CTVsuggestTrain package, \code{\link[CTVsuggestTrain:::download_taskview_data]{CTVsuggestTrain::::download_taskview_data()}}, I have copied the code to the CTVsuggest package to avoid dependencies.
+This function also exists in the CTVsuggestTrain package, CTVsuggestTrain:::download_taskview_data(), I have copied the code to the CTVsuggest package to avoid dependencies.
 }

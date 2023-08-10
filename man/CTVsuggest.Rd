@@ -18,6 +18,10 @@ CTVsuggest(
 \item{n}{An integer that decides the number of suggestions to show.}
 
 \item{ignore}{A character vector of package names that you want to ignore from output suggestions.}
+
+\item{package}{A string, that is a package name that is on CRAN.}
+
+\item{ranktaskview}{A character vector with one element, must be one of the \href{https://github.com/cran-task-views/ctv#available-task-views}{Task Views available}}
 }
 \value{
 A \link{data.frame} with suggested packages and there classification probability.

@@ -8,6 +8,8 @@
 #' @param taskview A character vector with one element, must be one of the [Task Views available](https://github.com/cran-task-views/ctv#available-task-views)
 #' @param n An integer that decides the number of suggestions to show.
 #' @param ignore A character vector of package names that you want to ignore from output suggestions.
+#' @param package A string, that is a package name that is on CRAN.
+#' @param ranktaskview A character vector with one element, must be one of the [Task Views available](https://github.com/cran-task-views/ctv#available-task-views)
 #'
 #' @return A [data.frame] with suggested packages and there classification probability.
 #'
