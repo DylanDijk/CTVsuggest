@@ -19,3 +19,4 @@ Default option is to extract Task View data from CRAN Task View repository: "htt
 \details{
 This function also exists in the CTVsuggestTrain package, CTVsuggestTrain:::download_taskview_data(), I have copied the code to the CTVsuggest package to avoid dependencies.
 }
+\keyword{internal}
