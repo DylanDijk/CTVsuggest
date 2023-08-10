@@ -9,7 +9,7 @@
 #'
 #' @return Data of the current Task Views available.
 #'
-#'
+#' @keywords internal
 
 download_taskview_data = function(repos = getOption("repos")[1]){
   urlrds <- paste0(repos, "/src/contrib/Views.rds")
