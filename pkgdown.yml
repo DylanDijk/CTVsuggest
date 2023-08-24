@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   CTVsuggest-Overview: CTVsuggest-Overview.html
-last_built: 2023-08-10T18:50Z
+last_built: 2023-08-24T15:54Z
 urls:
   reference: https://dylandijk.github.io/CTVsuggest/reference
   article: https://dylandijk.github.io/CTVsuggest/articles
