@@ -126,7 +126,7 @@ View [Section 4.3.1](https://dylandijk.github.io/assets/pdf/Dissertation.pdf#pag
 Using the trained model, I can get predictions by looking at the predicted classification probabilities when given the set of features of a package.
 I output the predicted classification probabilities for the packages that are not assigned a Task View and do not meet the monthly download threshold I mentioned in the previous section.
 
-### Accuracy
+### Model Performance
 
 The accuracy of the model can then be measured by comparing the trained model predictions with the testing set.
 

@@ -2,7 +2,7 @@ Package: CTVsuggest
 Title: CRAN Task View Package Recommendations
 Version: 0.0.0.9000
 Authors@R: 
-    person("Dylan", "Dijk", , "zl2291@bristol.ac.uk", role = c("aut", "cre"),
+    person("Dylan", "Dijk", , "zl22291@bristol.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Gives recommendations for packages to be added to CRAN Task Views.
 License: MIT + file LICENSE
