@@ -8,8 +8,8 @@
 <meta name="description" content="CTVsuggest">
 <title>CTVsuggest Overview • CTVsuggest</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="CTVsuggest Overview">
 <meta property="og:description" content="CTVsuggest">
@@ -108,12 +108,12 @@ that outputs these suggestions.</p>
 Task View</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/CTVsuggest.html">CTVsuggest</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, taskview <span class="op">=</span> <span class="st">"NaturalLanguageProcessing"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                  NaturalLanguageProcessing         Packages</span></span>
-<span><span class="co">#&gt; LSX                              0.9967206              LSX</span></span>
-<span><span class="co">#&gt; doc2vec                          0.9944117          doc2vec</span></span>
-<span><span class="co">#&gt; morestopwords                    0.9859379    morestopwords</span></span>
-<span><span class="co">#&gt; qdapDictionaries                 0.9833501 qdapDictionaries</span></span>
-<span><span class="co">#&gt; R.temis                          0.9808156          R.temis</span></span></code></pre></div>
+<span><span class="co">#&gt;                NaturalLanguageProcessing       Packages</span></span>
+<span><span class="co">#&gt; LSX                            0.9946226            LSX</span></span>
+<span><span class="co">#&gt; doc2vec                        0.9940239        doc2vec</span></span>
+<span><span class="co">#&gt; jiebaRD                        0.9892844        jiebaRD</span></span>
+<span><span class="co">#&gt; morestopwords                  0.9802875  morestopwords</span></span>
+<span><span class="co">#&gt; text.alignment                 0.9770789 text.alignment</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="the-package-workflow">The Package Workflow<a class="anchor" aria-label="anchor" href="#the-package-workflow"></a>
@@ -268,7 +268,7 @@ packages that are not assigned a Task View and do not meet the monthly
 download threshold I mentioned in the previous section.</p>
 </div>
 <div class="section level3">
-<h3 id="accuracy">Accuracy<a class="anchor" aria-label="anchor" href="#accuracy"></a>
+<h3 id="model-performance">Model Performance<a class="anchor" aria-label="anchor" href="#model-performance"></a>
 </h3>
 <p>The accuracy of the model can then be measured by comparing the
 trained model predictions with the testing set.</p>
@@ -277,7 +277,7 @@ largest predicted probability. The accuracy is then measured as the
 proportion of correct predictions on the testing set. For packages that
 are assigned to multiple Task Views, I set a prediction as accurate if
 its prediction is one of its assigned Task Views.</p>
-<p>The current (2023-09-12 10:03:11.774287) accuracy is: 80.87%.</p>
+<p>The current (2024-01-30 09:03:39.37332) accuracy is: 80.77%.</p>
 </div>
 </div>
 <div class="section level2">
